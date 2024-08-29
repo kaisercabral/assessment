@@ -1,23 +1,18 @@
-class TransactionsTests:
-    def __init__(self):
-        self.transactions = []
+import unittest
+import os
 
-    def add_transaction(self, transaction):
-        """Adds a transaction to the list."""
-        self.transactions.append(transaction)
-        print(f"Transaction {transaction} added.")
+FILE_PATH = '../files/transactions.csv'
+NEW_FILE_PATH = '../files/new_transactions.csv'
 
-    def validate_transaction(self, transaction):
-        """Validates if a specific transaction is in the list."""
-        if transaction in self.transactions:
-            print(f"Transaction {transaction} is valid.")
-            return True
-        else:
-            print(f"Transaction {transaction} is not found.")
-            return False
 
-    # Example usage:
-    tests = TransactionsTests()
-    tests.add_transaction("TX123")
-    tests.validate_transaction("TX123")
-    tests.validate_transaction("TX999")
+class TransactionsTests(unittest.TestCase):
+
+    def test_load_file(self):
+        self.assertTrue(os.path.isfile(FILE_PATH), f"File '{FILE_PATH}' does not exist.")
+
+    def test_new_transactions_file(self):
+        self.assertTrue(os.path.isfile(NEW_FILE_PATH), f"File '{NEW_FILE_PATH}' does not exist.")
+
+
+if __name__ == '__main__':
+    unittest.main()
